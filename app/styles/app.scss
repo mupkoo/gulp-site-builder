@@ -35,7 +35,13 @@ h1 {
     text-align: center;
 
     > img {
+        transition: all .3s cubic-bezier(0.65, 0.01, 0.35, 0.99);
         max-width: 200px;
         border-radius: 100px;
+
+        &.faded {
+            opacity: .7;
+            transform: scale(.6);
+        }
     }
 }
