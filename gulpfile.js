@@ -18,6 +18,7 @@ gulp.task('styles:dev', function () {
 
 gulp.task('watch', function () {
     gulp.watch('app/styles/**/*.scss', ['styles:dev']);
+    gulp.watch('app/**/*.html').on('change', browserSync.reload);
 });
 
 gulp.task('serve', ['styles:dev', 'watch'], function () {
