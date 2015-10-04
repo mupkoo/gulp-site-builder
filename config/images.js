@@ -15,5 +15,6 @@ exports.images = {
 
 exports.config = {
     quality: 90,
-    errorOnUnusedImage: false
+    errorOnUnusedImage: false,
+    passThroughUnused: true
 };
