@@ -34,6 +34,8 @@ project-name/
     app/
         images/      - all the images
         javascripts/ - all the scripts
+        layouts/     - all the layouts
+        shared/      - all the partials
         styles/      - all the stylesheets
         index.html
 
