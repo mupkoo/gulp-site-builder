@@ -11,6 +11,7 @@ var uglify       = require('gulp-uglify');
 var sourcemaps   = require('gulp-sourcemaps');
 var sass         = require('gulp-sass');
 var uncss        = require('gulp-uncss');
+var autoprefixer = require('gulp-autoprefixer');
 var nano         = require('gulp-cssnano');
 var htmlmin      = require('gulp-html-minifier');
 var responsive   = require('gulp-responsive');
@@ -67,6 +68,7 @@ gulp.task('styles:dist', function () {
 
     return gulp.src('app/styles/app.scss', { base: 'app' })
         .pipe(sass())
+        .pipe(autoprefixer())
         .pipe(uncss({
             html: ['app/index.html']
         }))
