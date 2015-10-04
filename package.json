@@ -26,6 +26,7 @@
     "browser-sync": "^2.9.8",
     "browserify": "^11.2.0",
     "gulp": "^3.9.0",
+    "gulp-responsive": "^1.2.1",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
     "jquery": "^2.1.4",
