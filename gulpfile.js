@@ -10,7 +10,11 @@ gulp.task('styles:dev', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['styles:dev'], function () {
+gulp.task('watch', function () {
+    gulp.watch('app/styles/**/*.scss', ['styles:dev']);
+});
+
+gulp.task('serve', ['styles:dev', 'watch'], function () {
     browserSync.init({
         port: 8091,
         open: false,
