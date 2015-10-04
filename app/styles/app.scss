@@ -1,0 +1,41 @@
+$color-green: #429867;
+$color-violet: #482344;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue';
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    background-image:
+        linear-gradient(to right, rgba($color-violet, .6), rgba($color-green, .6)),
+        url(/images/glacier.jpg);
+    background-size: cover;
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: white;
+    margin: 0;
+    padding-bottom: 20px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.images {
+    text-align: center;
+
+    > img {
+        max-width: 200px;
+        border-radius: 100px;
+    }
+}
