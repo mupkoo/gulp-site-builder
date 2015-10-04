@@ -5,11 +5,17 @@ var del          = require('del');
 var browserSync  = require('browser-sync').create();
 var source       = require('vinyl-source-stream');
 var buffer       = require('vinyl-buffer');
-var sourcemaps   = require('gulp-sourcemaps');
-var sass         = require('gulp-sass');
 var browserify   = require('browserify');
 var babelify     = require('babelify');
+var uglify       = require('gulp-uglify');
+var sourcemaps   = require('gulp-sourcemaps');
+var sass         = require('gulp-sass');
+var uncss        = require('gulp-uncss');
+var nano         = require('gulp-cssnano');
+var htmlmin      = require('gulp-html-minifier');
 var responsive   = require('gulp-responsive');
+var imagemin     = require('gulp-imagemin');
+var pngquant     = require('imagemin-pngquant');
 var images       = require('./config/images');
 var rev          = require('./config/rev');
 var revReplace   = require('gulp-rev-replace');
@@ -52,6 +58,7 @@ gulp.task('javascripts:dist', function () {
         .bundle()
         .pipe(source('javascripts/app.js'))
         .pipe(buffer())
+        .pipe(uglify())
         .pipe(rev());
 });
 
@@ -60,6 +67,10 @@ gulp.task('styles:dist', function () {
 
     return gulp.src('app/styles/app.scss', { base: 'app' })
         .pipe(sass())
+        .pipe(uncss({
+            html: ['app/index.html']
+        }))
+        .pipe(nano())
         .pipe(revReplace({ manifest: manifest }))
         .pipe(rev());
 });
@@ -67,6 +78,11 @@ gulp.task('styles:dist', function () {
 gulp.task('images:dist', function () {
     return gulp.src('app/images/**/*.{png,jpg,jpeg,gif,svg}', { base: 'app' })
         .pipe(responsive(images.images, images.config))
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{ removeViewBox: false }],
+            use: [pngquant()]
+        }))
         .pipe(rev());
 });
 
@@ -74,6 +90,7 @@ gulp.task('html:dist', function () {
     var manifest = gulp.src('dist/rev-minifest.json');
 
     return gulp.src('app/*.html')
+        .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(revReplace({ manifest: manifest }))
         .pipe(gulp.dest('dist'));
 });
