@@ -41,11 +41,7 @@ project-name/
 
 ## Start the dev server
 
-The dev server can be started just be typing
-
-```
-gulp
-```
+The dev server can be started just be typing `gulp` or `gulp serve`. Then you can visit `localhost:8091` to access it.
 
 ## Production build
 
