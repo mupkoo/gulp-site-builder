@@ -6,6 +6,8 @@ Combination of Glup plugins for building static websites.
 
 This repo includes the following plugins
 
+* HTML
+    * Use inheritance, partials, etc via Nunjucks (the files in `app/layouts`, `app/shared` won't be copied to dist)
 * JavaScript
     * Packs JS files using Browserify
     * Transforms ES6 files using Babel

@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "layouts/application.html" %}
 
-    <title>Gulp Site Builder</title>
-    <meta name="description" content="">
-
-    <link rel="stylesheet" href="/styles/app.css">
-</head>
-<body>
+{% block content %}
     <div class="wrapper">
         <h1>Gulp Site builder</h1>
 
@@ -19,7 +9,4 @@
                 srcset="/images/island-x1.jpg 1x, /images/island-x2.jpg 2x">
         </div>
     </div>
-
-    <script src="/javascripts/app.js"></script>
-</body>
-</html>
+{% endblock %}

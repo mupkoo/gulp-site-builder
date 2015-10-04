@@ -13,6 +13,7 @@ var sass         = require('gulp-sass');
 var uncss        = require('gulp-uncss');
 var autoprefixer = require('gulp-autoprefixer');
 var nano         = require('gulp-cssnano');
+var nunjucks     = require('gulp-nunjucks-render');
 var htmlmin      = require('gulp-html-minifier');
 var responsive   = require('gulp-responsive');
 var imagemin     = require('gulp-imagemin');
@@ -48,6 +49,16 @@ gulp.task('images:dev', function () {
         .pipe(responsive(images.images, images.config))
         .pipe(gulp.dest('tmp'));
 });
+
+gulp.task('html:dev', function () {
+    nunjucks.nunjucks.configure(['app/'], { watch: false });
+
+    return gulp.src(['app/**/*.html', '!app/layouts/**/*.html'], { base: 'app' })
+        .pipe(nunjucks())
+        .pipe(gulp.dest('tmp'));
+});
+
+gulp.task('html:dev:reload', ['html:dev'], browserSync.reload);
 
 gulp.task('clean:dist', function () {
     return del(['dist/*']);
@@ -91,7 +102,10 @@ gulp.task('images:dist', function () {
 gulp.task('html:dist', function () {
     var manifest = gulp.src('dist/rev-minifest.json');
 
-    return gulp.src('app/*.html')
+    nunjucks.nunjucks.configure(['app/'], { watch: false });
+
+    return gulp.src(['app/**/*.html', '!app/layouts/**/*.html', '!app/shared/**/*.html'], { base: 'app' })
+        .pipe(nunjucks())
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(revReplace({ manifest: manifest }))
         .pipe(gulp.dest('dist'));
@@ -101,10 +115,10 @@ gulp.task('watch', function () {
     gulp.watch('app/javascripts/**/*.js', ['javascripts:dev:reload']);
     gulp.watch('app/styles/**/*.scss', ['styles:dev']);
     gulp.watch('app/images/**/*', ['images:dev']).on('change', browserSync.reload);
-    gulp.watch('app/**/*.html').on('change', browserSync.reload);
+    gulp.watch('app/**/*.html', ['html:dev:reload']);
 });
 
-gulp.task('serve', ['javascripts:dev', 'styles:dev', 'images:dev', 'watch'], function () {
+gulp.task('serve', ['javascripts:dev', 'styles:dev', 'images:dev', 'html:dev', 'watch'], function () {
     browserSync.init({
         port: 8091,
         open: false,
