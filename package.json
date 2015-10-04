@@ -1,0 +1,24 @@
+{
+  "name": "gulp-site-builder",
+  "version": "1.0.0",
+  "description": "A simple site builder powered by Gulp",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mupkoo/gulp-site-builder.git"
+  },
+  "keywords": [
+    "gulp",
+    "site",
+    "builder"
+  ],
+  "author": "Mirko Akov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mupkoo/gulp-site-builder/issues"
+  },
+  "homepage": "https://github.com/mupkoo/gulp-site-builder"
+}
