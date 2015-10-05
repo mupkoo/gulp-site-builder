@@ -36,6 +36,7 @@ gulp.task('styles:dev', function () {
     return gulp.src('app/styles/app.scss', { base: 'app' })
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
         .pipe(sourcemaps.write({
             includeContent: false,
             sourceRoot: '/'
